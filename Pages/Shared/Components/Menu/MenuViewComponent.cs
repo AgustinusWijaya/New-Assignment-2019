@@ -15,9 +15,26 @@ namespace NewAssignment2019.Pages.Shared.Components.Menu
         public override async Task<IViewComponentResult> InvokeAsync()
         {
             List<MenuItem> menuItems = new MenuService().GetMenu();
+            foreach (var item in menuItems)
+            {
+                GenerateUrl(item);
+            }
             return await Task.FromResult(View(menuItems));
-
+            
             //return await Task.FromResult(View(GetMenuItems()));
+        }
+
+        public void GenerateUrl(MenuItem menu)
+        {
+            if (menu.Items != null)
+                foreach (var item in menu.Items)
+                {
+                    if (!string.IsNullOrWhiteSpace(item.url))
+                    {
+                        item.url = $"{Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}/{item.url}";
+                    }
+                    GenerateUrl(item);
+                }
         }
 
         //public class MenuItem

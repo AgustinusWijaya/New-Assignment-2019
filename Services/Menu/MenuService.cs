@@ -15,11 +15,11 @@ namespace NewAssignment2019.Services.Menu
             {
                 new MenuItem
                 {
-                    Id = Menus.MenuId_Master, Text = "Master", ParentId = null, Url = string.Empty,
+                    Id = Menus.MenuId_Master, Text = "Master", ParentId = null, url = string.Empty,
                     Items = new List<MenuItem>
                     {
-                        new MenuItem { Id = Menus.MenuId_Master_Client, Text = "Clients", ParentId = Menus.MenuId_Master, Url = "Master/Client" },
-                        new MenuItem { Id = Menus.MenuId_Master_Project, Text = "Projects", ParentId = Menus.MenuId_Master, Url = "Master/Project" },
+                        new MenuItem { Id = Menus.MenuId_Master_Client, Text = "Clients", ParentId = Menus.MenuId_Master, url = "Admin/Client" },
+                        new MenuItem { Id = Menus.MenuId_Master_Project, Text = "Projects", ParentId = Menus.MenuId_Master, url = "Admin/Project" },
                     }
                 }
             };
@@ -39,7 +39,7 @@ namespace NewAssignment2019.Services.Menu
 
         [Newtonsoft.Json.JsonProperty("text")]
         public string Text { get; set; }
-        public string Url { get; set; }
+        public string url { get; set; }
 
         [Newtonsoft.Json.JsonProperty("separator")]
         public bool Separator { get; set; }
