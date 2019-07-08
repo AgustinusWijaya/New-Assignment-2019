@@ -24,7 +24,6 @@ namespace NewAssignment2019.Areas.Admin.Pages.ProjectFeatures
             }
 
             ProjectFeature = await db.ProjectFeature.Where(w => w.ProjectId == projectId).OrderBy(o=>o.Code).ToListAsync();
-
             return Page();
         }
     }

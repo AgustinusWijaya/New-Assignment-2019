@@ -11,62 +11,18 @@
     <div style="text-align:center"><a asp-page="Create"><i class="fa fa-plus-square"></i></a></div>
 </div>
 
+<ejs-grid id="Grid" dataSource=@Model.ProjectFeature>
+    <e-grid-columns>
+        <e-grid-column field="Code" headerText="Code"></e-grid-column>
+        <e-grid-column field="Name" headerText="Name"></e-grid-column>
+        <e-grid-column field="Description" headerText="Description"></e-grid-column>
+        <e-grid-column field="ParentCode" headerText="ParentCode"></e-grid-column>
+        <e-grid-column template="#template" style="display:inline-flex"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+<script id="template" type="text/x-template">
+    <a href="@Url.Page("./Edit")?id=${Id}">U </a> |
+    <a href="@Url.Page("./Details")?id=${Id}">R </a> |
+    <a href="@Url.Page("./Delete")?id=${Id}">D </a>
+</script>
 
-@*<ejs-grid id="DataGrid" dataSource="@Model.ProjectFeature.ToList()">
-        <e-grid-columns>
-            <e-grid-column field="Code"></e-grid-column>
-            <e-grid-column field="Description"></e-grid-column>
-            <e-grid-column field="ParentCode"></e-grid-column>
-            <e-grid-column field="IsLeaf"></e-grid-column>
-        </e-grid-columns>
-    </ejs-grid>*@
-
-
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProjectFeature[0].Code)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProjectFeature[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProjectFeature[0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProjectFeature[0].ParentCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProjectFeature[0].IsLeaf)
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.ProjectFeature)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Code)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ParentCode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsLeaf)
-                <td style="display:inline-flex">
-                    <a asp-page="./Edit" asp-route-id="@item.Id">U </a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">R </a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">D </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
