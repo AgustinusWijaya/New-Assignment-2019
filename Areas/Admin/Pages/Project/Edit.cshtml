@@ -1,0 +1,137 @@
+﻿@page
+@model NewAssignment2019.Areas.Admin.Pages.Project.EditModel
+
+@{
+    ViewData["Title"] = "Edit Project";
+}
+
+<link rel="stylesheet" href="~/css/table-responsive.css" />
+<h1>@ViewData["Title"] </h1>
+
+
+<table width="100%" >
+    <tr style="vertical-align:top">
+        <td id="leftPane" style="width:100%; padding:10px" class="table">
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="post" class="form-group">
+                        <input type="hidden" asp-for="Project.Id" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Project.Code" class="control-label"></label>
+                            <input asp-for="Project.Code" class="form-control" />
+                            <span asp-validation-for="Project.Code" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Project.Name" class="control-label"></label>
+                            <input asp-for="Project.Name" class="form-control" />
+                            <span asp-validation-for="Project.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Project.ClientId" class="control-label"></label>
+                            <select asp-for="Project.ClientId" class="form-control" asp-items="ViewBag.ClientId"></select>
+                            <span asp-validation-for="Project.ClientId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fa fa-arrow-circle-right fa-lg"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </td>
+
+        <td id="rightPane" style="width:100%; vertical-align:top; padding:10px">
+            <div tabindex="0" class="e-card" id="features">
+                <div class="e-card-header">
+                    <div class="e-card-header-caption">
+                        <div class="e-card-header-title">Features <span class="e-badge e-badge-success e-badge-pill">@Model.FeatureCount</span></div>
+                        <div class="e-card-sub-title">There are a total of @Model.FeatureCount features for this project.</div>
+                    </div>
+                </div>
+                <div class="e-card-content">
+                    <div class="row">
+                        <div class="col-md-4" style="text-align:center">
+                            <a asp-page="." asp-route-projectId="@Model.Project.Id">
+                                <i class="fa fa-download fa-2x"></i>
+                            </a>
+                            <br />
+                            Download feature upload template
+                        </div>
+
+                        <div class="col-md-4" style="text-align:center">
+                            <form method="post" asp-page-handler="UploadFeatureFile" enctype="multipart/form-data" class="form-group">
+                                <input type="hidden" asp-for="Project.Id" />
+                                <div style="cursor: pointer;" onclick="$('#inputUpload').click(); return false;">
+                                    <a class="fa fa-upload red fa-2x"></a>
+                                    <label asp-for="UploadFeatureFile" class="control-label" style="cursor: pointer;"></label>
+                                </div>
+
+                                <input id="inputUpload" name="inputUpload" asp-for="UploadFeatureFile" onchange="this.form.submit();"
+                                       type="file" style="display: none;">
+                            </form>
+                        </div>
+
+                        <div class="col-md-4" style="text-align:center">
+                            <a asp-page="../ProjectFeatures/Index" asp-route-projectId="@Model.Project.Id">
+                                <i class="fa fa-table fa-2x"></i>
+                            </a>
+                            <br />
+                            View all features
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div tabindex="0" class="e-card" id="sprints">
+                <div class="e-card-header">
+                    <div class="e-card-header-caption">
+                        <div class="e-card-header-title">
+                            Sprints (@Model.ProjectSprints.Count())
+                            <a asp-page="../ProjectSprint/Create" asp-route-projectId="@Model.Project.Id">
+                                <i class="fa fa-plus-square"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="e-card-content">
+                    <table class="table table-hover table-responsive table-borderless" style="width:100%">
+                        <tbody>
+                            @foreach (var item in Model.ProjectSprints)
+                            {
+                                <tr>
+                                    <td width="100%">
+                                        [<label>@item.Code</label>] <label>@item.Name</label> (<label>@item.FeatureCount feats.</label>)
+                                        <br />
+                                        <div nowrap>
+                                            <label>@item.DateBegin.ToString("dd MMM")</label> - <label>@item.DateEnd.ToString("dd MMM yyyy")</label>
+                                            <a asp-page="../ProjectSprint/Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
+                                            <a asp-page="../ProjectSprint/Details" asp-route-id="@item.Id"><i class="fa fa-eye"></i></a>
+                                            <a asp-page="../ProjectSprint/Delete" asp-route-id="@item.Id"><i class="fa fa-trash red"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </td>
+    </tr>
+</table>
+
+
+
+
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

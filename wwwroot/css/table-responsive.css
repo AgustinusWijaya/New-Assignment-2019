@@ -1,0 +1,19 @@
+﻿@media all and (max-width:800px) {
+    table {
+        width: 100%;
+    }
+
+    td {
+        display: block;
+        width: 100%;
+    }
+
+    tr {
+        display: block;
+        margin-bottom: 30px;
+    }
+
+        tr tr {
+            margin-bottom: 0;
+        }
+}

@@ -1,0 +1,75 @@
+﻿@page
+@model NewAssignment2019.Areas.Admin.Pages.ProjectFeatures.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>ProjectFeature</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProjectFeature.ProjectId" class="control-label"></label>
+                <input asp-for="ProjectFeature.ProjectId" class="form-control" />
+                <span asp-validation-for="ProjectFeature.ProjectId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectFeature.Code" class="control-label"></label>
+                <input asp-for="ProjectFeature.Code" class="form-control" />
+                <span asp-validation-for="ProjectFeature.Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectFeature.Description" class="control-label"></label>
+                <input asp-for="ProjectFeature.Description" class="form-control" />
+                <span asp-validation-for="ProjectFeature.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectFeature.ParentCode" class="control-label"></label>
+                <input asp-for="ProjectFeature.ParentCode" class="form-control" />
+                <span asp-validation-for="ProjectFeature.ParentCode" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ProjectFeature.IsLeaf" /> @Html.DisplayNameFor(model => model.ProjectFeature.IsLeaf)
+                </label>
+            </div>
+            <input type="hidden" asp-for="ProjectFeature.Id" />
+            <div class="form-group">
+                <label asp-for="ProjectFeature.CreatedDate" class="control-label"></label>
+                <input asp-for="ProjectFeature.CreatedDate" class="form-control" />
+                <span asp-validation-for="ProjectFeature.CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectFeature.CreatedBy" class="control-label"></label>
+                <input asp-for="ProjectFeature.CreatedBy" class="form-control" />
+                <span asp-validation-for="ProjectFeature.CreatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectFeature.ModifiedDate" class="control-label"></label>
+                <input asp-for="ProjectFeature.ModifiedDate" class="form-control" />
+                <span asp-validation-for="ProjectFeature.ModifiedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectFeature.ModifiedBy" class="control-label"></label>
+                <input asp-for="ProjectFeature.ModifiedBy" class="form-control" />
+                <span asp-validation-for="ProjectFeature.ModifiedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
